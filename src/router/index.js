@@ -22,7 +22,7 @@ const routes = [
       {
         path: 'paperreseach',
         name: 'paperreseach',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/PaperResearch.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/PaperResearchPage.vue'),
       }
     ],
   },

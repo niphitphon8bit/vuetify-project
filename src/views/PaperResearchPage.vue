@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-  import PaperResearchPage from '@/components/PaperReseachPage.vue'
+  import PaperResearchPage from '@/components/PaperResearchPage.vue'
 </script>
