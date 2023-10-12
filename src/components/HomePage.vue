@@ -160,13 +160,17 @@
 
 <script setup>
 import { ref } from 'vue';
+import image1 from '@/assets/1.jpg';
+import image2 from '@/assets/2.jpg';
+import image3 from '@/assets/3.jpg';
+import image4 from '@/assets/4.jpg';
 
 const images = ref([
-      '/src/assets/1.jpg',
-      '/src/assets/2.jpg',
-      '/src/assets/3.jpg',
-      '/src/assets/4.jpg'
-    ]);
+  image1,
+  image2,
+  image3,
+  image4
+]);
 
     const onboarding = ref(1);
 
