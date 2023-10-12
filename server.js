@@ -6,10 +6,19 @@ const db = new sqlite3.Database('./papers.db');
 const multer = require('multer');
 const app = express();
 const fs = require('fs');
+const cors = require('cors');
+
+app.use(cors());
 
 // use dist as a frontend for a frontend server
 app.use(serveStatic(path.join(__dirname, 'dist')));
 
+// create path of folder upload files
+const uploadDir = path.join(__dirname, 'uploads', 'research_papers');
+
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 // define upload directory
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
