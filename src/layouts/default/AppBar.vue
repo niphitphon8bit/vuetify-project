@@ -16,5 +16,5 @@
 <script setup>
 import ThemeToggler from '@/components/ThemeToggler.vue'
 import HomeButton from '@/components/HomeButton.vue'
-import PaperResearchButton from '@/components/PaperResearch.vue'
+import PaperResearchButton from '@/components/PaperResearchButton.vue'
 </script>

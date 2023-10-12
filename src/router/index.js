@@ -18,6 +18,11 @@ const routes = [
         path: '',
         name: 'Home',
         component: () => import(/* webpackChunkName: "home" */ '@/views/HomePage.vue'),
+      },
+      {
+        path: 'paperreseach',
+        name: 'paperreseach',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/PaperResearch.vue'),
       }
     ],
   },
