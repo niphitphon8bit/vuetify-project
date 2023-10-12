@@ -1,20 +1,30 @@
 <template>
-  <v-btn to="/">
+  <v-btn @click="handleClick">
     Home
   </v-btn>
 </template>
 
 <script setup>
-// function scrollTo(n){
-//   const element = document.getElementById(n);
-//   if(element == null){
+import { useRoute, useRouter } from 'vue-router';
 
-//   }else{
-//     element.scrollIntoView({
-//       behavior: "smooth",
-//       block: 'center'
-//     });
+const route = useRoute();
+const router = useRouter();
 
-//   }
-// }
+const handleClick = () => {
+  if (route.path === '/') {
+    scrollTo('firstSection'); // Replace 'targetElementId' with the ID of the element you want to scroll to
+  } else {
+    router.push('/');
+  }
+}
+
+function scrollTo(n) {
+  const element = document.getElementById(n);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: 'center'
+    });
+  }
+}
 </script>
