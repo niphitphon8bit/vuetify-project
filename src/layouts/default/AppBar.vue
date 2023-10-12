@@ -7,6 +7,7 @@
 
       </v-img>
     </v-app-bar-title>
+    <paper-research-button/>
     <home-button/>
     <theme-toggler/>
   </v-app-bar>
@@ -15,4 +16,5 @@
 <script setup>
 import ThemeToggler from '@/components/ThemeToggler.vue'
 import HomeButton from '@/components/HomeButton.vue'
+import PaperResearchButton from '@/components/PaperResearch.vue'
 </script>
