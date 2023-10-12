@@ -15,16 +15,18 @@
         </v-card-title>
         <v-data-table
           :headers="headers"
-          :items="papers"
+          :items-length="totalItems"
+          :items="allItems"
           :search="search"
+          class="elevation-1"
+          item-value="filename"
+          :loading="loading"
         >
-          <!-- Use the item slot to customize row rendering -->
           <template v-slot:item="{ item, index }">
             <tr>
-              <td>{{ index + 1 }}</td> <!-- Display row number -->
+              <td>{{ index + 1 }}</td>
               <td><a :href="item.filepath" download>{{ item.filename }}</a></td>
-              <td>{{ item.upload_date }}</td>
-              <!-- Add a download button at the end of each row -->
+              <td>{{ formatDate(item.upload_date) }}</td>
               <td>
                 <v-btn small color="primary" :href="item.filepath" download>Download</v-btn>
               </td>
@@ -37,17 +39,13 @@
 </template>
 
 <script setup>
-import { ref,onMounted } from 'vue';
-// import { formatDate } from 'vuetify/lib/util/helpers'
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 
-const papers = ref([]);
-
-//mock data
-// import { mockPapers } from "@/mockPapers.js";
-// const papers = mockPapers;
-
+const allItems = ref([]);
 const search = ref('');
+const totalItems = computed(() => allItems.value?.length || 0);
+const loading = ref(true);
 
 const headers = [
   {
@@ -76,26 +74,25 @@ const headers = [
     width: '150px'
   }
 ];
-
 // Create a function to format the date
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 };
 
-onMounted(async () => {
+const loadItems = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/list-papers');  // Replace with your backend endpoint
-     // Format the upload_date for each paper
-     papers.value = response.data.map(paper => ({
-      ...paper,
-      upload_date: formatDate(paper.upload_date)
-    }));
-
-    console.log('response', response);
-    // papers.value = response.data;  // Assuming the backend returns an array of papers
+    loading.value = true;
+    const response = await axios.get('http://localhost:8080/list-papers');
+    allItems.value = response.data.items || [];
+    loading.value = false;
+    totalItems.value = allItems.value.length;
+    console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching papers:", error);
   }
-});
+};
+
+onMounted(loadItems);
+
 </script>
