@@ -11,7 +11,7 @@
           <v-col cols="6">
             <v-row align="center" justify="center">
               <v-col cols="12" md="8" xl="8">
-                <h1 class="display-2 font-weight-bold mb-4">Vuetify.js</h1>
+                <!-- <h1 class="display-2 font-weight-bold mb-4">Vuetify.js</h1> -->
                 <v-sheet
                 :elevation="5"
                 border
