@@ -25,4 +25,3 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "vuetify-app"
         heroku_email: "niphitphon_nt@hotmail.com"
-        healthcheck: "https://vuetify-app.herokuapp.com"
