@@ -11,6 +11,11 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify } from 'vuetify'
 
+import {
+  VDataTable,
+  VDataTableServer,
+  VDataTableVirtual,
+} from "vuetify/labs/VDataTable";
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 /*const myCustomLightTheme = {
   dark: false,
@@ -31,5 +36,10 @@ import { createVuetify } from 'vuetify'
 export default createVuetify({
   theme: {
     defaultTheme: 'dark'
-  }
+  },
+  components: {
+    VDataTable,
+    VDataTableServer,
+    VDataTableVirtual,
+  },
 })

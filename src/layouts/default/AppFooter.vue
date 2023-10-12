@@ -1,6 +1,6 @@
 <template>
-  <v-footer dark padless>
-    <v-card flat tile class="secondary white--text text-center">
+  <v-footer dark >
+    <v-card tile class="secondary white--text text-center">
       <v-card-text>
         <v-row no-gutters>
           <v-col
@@ -45,28 +45,28 @@ import eggImage from '@/assets/pngegg.png';
 const images = ref([
   {
     src: factori4Image,
-    maxHeight: "200px",
-    maxWidth: "300px"
+    maxHeight: "100px",
+    maxWidth: "200px"
   },
   {
     src: icapsImage,
-    maxHeight: "200px",
-    maxWidth: "300px"
+    maxHeight: "100px",
+    maxWidth: "200px"
   },
   {
     src: logoImage,
-    maxHeight: "200px",
-    maxWidth: "300px"
+    maxHeight: "100px",
+    maxWidth: "200px"
   },
   {
     src: nineImage,
-    maxHeight: "200px",
-    maxWidth: "300px"
+    maxHeight: "100px",
+    maxWidth: "100px"
   },
   {
     src: eggImage,
-    maxHeight: "200px",
-    maxWidth: "300px"
+    maxHeight: "100px",
+    maxWidth: "200px"
   }
 ]);
 

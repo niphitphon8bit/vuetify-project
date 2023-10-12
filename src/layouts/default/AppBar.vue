@@ -7,8 +7,8 @@
 
       </v-img>
     </v-app-bar-title>
-    <paper-research-button/>
     <home-button/>
+    <paper-research-button/>
     <theme-toggler/>
   </v-app-bar>
 </template>
