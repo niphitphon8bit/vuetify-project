@@ -84,17 +84,24 @@ const formatDate = (dateString) => {
 const loadItems = async () => {
   try {
     loading.value = true;
-    console.log(apiUrl);
     const response = await axios.get(apiUrl + '/list-papers');
     allItems.value = response.data.items || [];
     loading.value = false;
     totalItems.value = allItems.value.length;
-    console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching papers:", error);
   }
 };
 
-onMounted(loadItems);
+// let pollingInterval;
+
+onMounted(() => {
+  loadItems(); // Load items immediately on component mount
+  // pollingInterval = setInterval(loadItems, 10000); // Poll every 10 seconds
+});
+
+onUnmounted(() => {
+  // clearInterval(pollingInterval); // Clear the interval when the component is destroyed
+});
 
 </script>

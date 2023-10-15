@@ -9,48 +9,78 @@ const app = express();
 const fs = require('fs');
 const cors = require('cors');
 
+// let isDev;
+// if (process.env.VITE_BACKEND_URL.includes('localhost')) {
+//   isDev = "http://localhost:8080";
+// } else {
+//   isDev = "https://vuetify-app-fefe20b91493.herokuapp.com/";
+// }
+
+const allowedOrigins = ['http://localhost:3000', 'https://vuetify-app-fefe20b91493.herokuapp.com'];
+
 const corsOptions = {
-  origin: 'https://vuetify-app-fefe20b91493.herokuapp.com/',
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   optionsSuccessStatus: 200
 };
+
 app.use(cors(corsOptions));
 
-process.env.VUE_APP_API_URL
-
-// use dist as a frontend for a frontend server
 app.use(serveStatic(path.join(__dirname, 'dist')));
 
-// create path of folder upload files
 const uploadDir = path.join(__dirname, 'uploads', 'research_papers');
-
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
-// define upload directory
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/research_papers/'); // Define the directory where files will be saved
+    cb(null, 'uploads/research_papers/');
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Name the file as a combination of the current timestamp and its original name
+    cb(null, Date.now() + '-' + file.originalname);
   }
 });
-const upload = multer({ storage: storage });
+
+const upload = multer({ storage: storage }).array('files', 10);
 
 // create table of isnt exist with name papers
 db.run("CREATE TABLE IF NOT EXISTS papers (id INTEGER PRIMARY KEY, filename TEXT, filepath TEXT, upload_date TEXT)");
 
-// upload paper post method
-app.post('/upload-paper', upload.single('file'), (req, res) => {
-  const { filename, path } = req.file;
+app.post('/upload-papers', upload, (req, res) => {
   const uploadDate = new Date().toISOString();
-  db.run("INSERT INTO papers (filename, filepath, upload_date) VALUES (?, ?, ?)", [filename, path, uploadDate], function (err) {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.json({ message: 'File uploaded successfully!', id: this.lastID });
+  const files = req.files;
+
+  if (!files || files.length === 0) {
+    return res.status(400).json({ error: 'No files uploaded' });
+  }
+
+  const insertQueries = files.map(file => {
+    return new Promise((resolve, reject) => {
+      db.run("INSERT INTO papers (filename, filepath, upload_date) VALUES (?, ?, ?)", [file.filename, file.path, uploadDate], function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(this.lastID);
+        }
+      });
+    });
   });
+
+  Promise.all(insertQueries)
+    .then(ids => {
+      res.json({ message: 'Files uploaded successfully!', ids: ids });
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
 });
+
 
 // get all paper
 app.get('/list-papers', (req, res) => {
@@ -64,27 +94,27 @@ app.get('/list-papers', (req, res) => {
 });
 
 // get list paper by parameter
-app.get('/list-papers', (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const itemsPerPage = parseInt(req.query.itemsPerPage) || 10;
-  const sortBy = req.query.sortBy || 'id'; // default sort by 'id'
-  const sortOrder = req.query.sortOrder || 'asc'; // default sort order is ascending
+// app.get('/list-papers', (req, res) => {
+//   const page = parseInt(req.query.page) || 1;
+//   const itemsPerPage = parseInt(req.query.itemsPerPage) || 10;
+//   const sortBy = req.query.sortBy || 'id';
+//   const sortOrder = req.query.sortOrder === 'desc' ? 'desc' : 'asc'; // Ensure only 'asc' or 'desc' is used
 
-  const offset = (page - 1) * itemsPerPage;
+//   const offset = (page - 1) * itemsPerPage;
 
-  const query = `
-    SELECT * FROM papers
-    ORDER BY ${sortBy} ${sortOrder}
-    LIMIT ? OFFSET ?
-  `;
+//   const query = `
+//     SELECT * FROM papers
+//     ORDER BY ? ?
+//     LIMIT ? OFFSET ?
+//   `;
 
-  db.all(query, [itemsPerPage, offset], (err, rows) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.json({ items: rows });
-  });
-});
+//   db.all(query, [sortBy, sortOrder, itemsPerPage, offset], (err, rows) => {
+//     if (err) {
+//       return res.status(500).json({ error: err.message });
+//     }
+//     res.json({ items: rows });
+//   });
+// });
 
 // get all paper list count
 app.get('/list-papers-count', (req, res) => {
@@ -152,6 +182,12 @@ app.post('/cleanup-records', (req, res) => {
 // This should be placed after all your other routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+// Centralized error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 // running on port 8080
