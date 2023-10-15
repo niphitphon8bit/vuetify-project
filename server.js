@@ -149,6 +149,11 @@ app.post('/cleanup-records', (req, res) => {
   });
 });
 
+// This should be placed after all your other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 // running on port 8080
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
