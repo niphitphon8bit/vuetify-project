@@ -9,7 +9,11 @@ const app = express();
 const fs = require('fs');
 const cors = require('cors');
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://vuetify-app-fefe20b91493.herokuapp.com/',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 process.env.VUE_APP_API_URL
 
