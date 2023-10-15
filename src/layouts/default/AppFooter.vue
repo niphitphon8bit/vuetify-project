@@ -1,6 +1,6 @@
 <template>
-  <v-footer dark >
-    <v-card tile class="secondary white--text text-center">
+  <v-footer dark padless>
+    <v-card flat tile class="secondary white--text text-center">
       <v-card-text>
         <v-row no-gutters>
           <v-col
