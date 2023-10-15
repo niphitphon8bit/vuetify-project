@@ -100,8 +100,8 @@ onMounted(() => {
   // pollingInterval = setInterval(loadItems, 10000); // Poll every 10 seconds
 });
 
-onUnmounted(() => {
+// onUnmounted(() => {
   // clearInterval(pollingInterval); // Clear the interval when the component is destroyed
-});
+// });
 
 </script>
