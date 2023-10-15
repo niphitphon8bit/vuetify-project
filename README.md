@@ -1,19 +1,11 @@
 # base
-
+this project based on yarn
 ## Project setup
 
 ```
 # yarn
 yarn
 
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# pnpm
-bun install
 ```
 
 ### Compiles and hot-reloads for development
@@ -21,15 +13,6 @@ bun install
 ```
 # yarn
 yarn dev
-
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# bun
-bun run dev
 ```
 
 ### Compiles and minifies for production
@@ -37,15 +20,6 @@ bun run dev
 ```
 # yarn
 yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# bun
-bun run build
 ```
 
 ### Lints and fixes files
@@ -54,14 +28,6 @@ bun run build
 # yarn
 yarn lint
 
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-
-# bun
-bun run lint
 ```
 
 ### Customize configuration
