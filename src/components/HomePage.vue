@@ -1,13 +1,8 @@
 <template>
   <v-container >
     <section id="firstSection">
-      <!-- <v-img
-      max-height="300px"
-      max-width="300px"
-      src="@/assets/factori4-removebg-preview.png">
-      </v-img> -->
       <v-parallax dark height="600">
-        <v-row class="mt-10" align="center" justify="center">
+        <v-row class="mt-10" align="left" justify="left">
           <v-col cols="6">
             <v-row align="center" justify="center">
               <v-col cols="12" md="8" xl="8">
@@ -37,53 +32,32 @@
                   </v-btn>
                 </div>
                 </v-sheet>
-                <!-- <v-card
-                title="CENTER OF EXCELLENCE"
-                text="IN INTELLIGENT CONTROL AUTOMATION OF PROCESS SYSTEMS
-                    AS CENTER OF PROGRAMMABLE LOGIC CONTROLLER TRAINING
-                    UNDER ERASMUS+ ASEAN FACTORI 4.0 PROJECT"
-                >
-              </v-card> -->
             </v-col>
             <v-col cols="12" md="4" xl="4" class="hidden-sm-and-down"> </v-col>
           </v-row>
           </v-col>
           <v-col cols="6">
-          <v-card theme="dark" flat rounded="4">
-            <v-window v-model="onboarding">
-              <v-window-item v-for="(image, index) in images" :key="index">
-                <v-card width="600px" height="400px" class="d-flex justify-center align-center">
+            <v-card theme="dark" flat rounded="4">
+              <v-carousel
+                cycle
+                height="400"
+                hide-delimiter-background
+                show-arrows="hover"
+              >
+                <v-carousel-item
+                  v-for="(image, index) in images"
+                  :key="index"
+                >
                   <v-img
-                    :width="500"
-                    :height="500"
+                    :width="'100%'"
+                    :height="'100%'"
                     aspect-ratio="1/1"
                     cover
                     :src="image"
-                    alt="Image">
-                  </v-img>
-                </v-card>
-              </v-window-item>
-            </v-window>
-
-            <v-card-actions class="justify-space-between">
-              <v-btn variant="plain" icon="mdi-chevron-left" @click="prev"></v-btn>
-              <v-item-group v-model="onboarding" class="text-center" mandatory>
-                <v-item
-                  v-for="n in images.length"
-                  :key="`btn-${n}`"
-                  v-slot="{ isSelected, toggle }"
-                  :value="n-1"
-                  >
-                  <v-btn
-                    :variant="isSelected ? 'outlined' : 'text'"
-                    icon="mdi-record"
-                    @click="toggle">
-                    {{ n }}
-                  </v-btn>
-                </v-item>
-              </v-item-group>
-              <v-btn variant="plain" icon="mdi-chevron-right" @click="next"></v-btn>
-            </v-card-actions>
+                    alt="Image"
+                  ></v-img>
+                </v-carousel-item>
+              </v-carousel>
         </v-card>
       </v-col>
       </v-row>
@@ -91,7 +65,6 @@
     </section>
   <v-container id="More">
     <v-responsive class="align-center text-center">
-      <!-- <h1>Test new Home Page</h1> -->
       <v-row no-gutters>
         <v-col
         sm="12"
@@ -171,16 +144,6 @@ const images = ref([
   image3,
   image4
 ]);
-
-    const onboarding = ref(1);
-
-    const next = () => {
-  onboarding.value = (onboarding.value + 1) % images.value.length;
-};
-
-const prev = () => {
-  onboarding.value = (onboarding.value - 1 + images.value.length) % images.value.length;
-};
 
 function scrollTo(n){
   const element = document.getElementById(n);

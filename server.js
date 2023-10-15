@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const serveStatic = require('serve-static');
@@ -9,6 +10,8 @@ const fs = require('fs');
 const cors = require('cors');
 
 app.use(cors());
+
+process.env.VUE_APP_API_URL
 
 // use dist as a frontend for a frontend server
 app.use(serveStatic(path.join(__dirname, 'dist')));

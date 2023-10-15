@@ -41,6 +41,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 const allItems = ref([]);
 const search = ref('');
@@ -83,7 +84,8 @@ const formatDate = (dateString) => {
 const loadItems = async () => {
   try {
     loading.value = true;
-    const response = await axios.get('http://localhost:8080/list-papers');
+    console.log(apiUrl);
+    const response = await axios.get(apiUrl + '/list-papers');
     allItems.value = response.data.items || [];
     loading.value = false;
     totalItems.value = allItems.value.length;
