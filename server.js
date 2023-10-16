@@ -16,7 +16,7 @@ const cors = require('cors');
 //   isDev = "https://vuetify-app-fefe20b91493.herokuapp.com/";
 // }
 
-const allowedOrigins = ['http://localhost:3000', 'https://vuetify-app-fefe20b91493.herokuapp.com'];
+const allowedOrigins = ['http://localhost:3000', 'https://vuetify-app-fefe20b91493.herokuapp.com', 'http://www.factori4.eng.chula.ac.th'];
 
 const corsOptions = {
   origin: function (origin, callback) {
