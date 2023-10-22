@@ -66,6 +66,7 @@ const allItems = ref([
   { filename: 'webpage-Training in EU at the University (PPP-Train1) on March 5-April 22022.docx', filepath: '/uploads/research_papers/webpage-Training in EU at the University (PPP-Train1) on March 5-April 22022.docx', upload_date: '2023-08-01' },
   { filename: 'webpage-Vocational (VPP-Training).docx', filepath: '/uploads/research_papers/webpage-Vocational (VPP-Training).docx', upload_date: '2023-07-28' },
   { filename: 'webpage-aug22.pptx', filepath: '/uploads/research_papers/webpage-aug22.pptx', upload_date: '2023-07-25' },
+  { filename: 'webpage-aug22.pptx', filepath: '/uploads/research_papers/webpage-aug22.pptx', upload_date: '2023-07-25' },
 ]);
 const search = ref('');
 const totalItems = computed(() => allItems.value?.length || 0);
