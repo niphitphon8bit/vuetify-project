@@ -5,30 +5,6 @@
  */
 
 // https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (å
+// @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
-
-.theme--light a {
-    color: black;
-    /* Color for light theme */
-    text-decoration: none;
-    /* Remove underline */
-}
-
-.theme--light a:hover {
-    text-decoration: underline;
-    /* Add underline on hover, optional */
-}
-
-.theme--dark a {
-    color: #D1D1D1;
-    /* Soft white color for dark theme */
-    text-decoration: none;
-    /* Remove underline */
-}
-
-.theme--dark a:hover {
-    text-decoration: underline;
-    /* Add underline on hover, optional */
-}
