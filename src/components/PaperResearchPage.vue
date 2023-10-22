@@ -25,7 +25,7 @@
           <template v-slot:item="{ item, index }">
             <tr>
               <td>{{ index + 1 }}</td>
-              <td><a :href="item.filepath" download>{{ item.filename }}</a></td>
+              <td><a :href="item.filepath" download :class="isDarkTheme ? 'text-grey-lighten-5' : 'text-black'">{{ item.filename }}</a></td>
               <td>{{ formatDate(item.upload_date) }}</td>
               <td>
                 <v-btn small color="primary" :href="item.filepath" download>Download</v-btn>
@@ -40,6 +40,11 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useTheme } from 'vuetify/lib/framework.mjs';
+
+const theme = useTheme();
+const isDarkTheme = computed(() => theme.global.current.value.dark);
+
 // import axios from 'axios';
 // const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
