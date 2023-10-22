@@ -44,6 +44,10 @@ import { ref, onMounted, computed } from 'vue';
 // const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 const allItems = ref([
+  { filename: 'ebook.pdf', filepath: '/uploads/research_papers/ebook.pdf', upload_date: '2023-10-21' },
+  { filename: 'webpage-2105676 Instrumentation in Chemical Process Course Syllabus-oct18.docx', filepath: '/uploads/research_papers/webpage-2105676 Instrumentation in Chemical Process Course Syllabus-oct18.docx', upload_date: '2023-10-21' },
+  { filename: 'webpage-2105472 Process Dynamics and Control Course Syllabus-oct18.docx', filepath: '/uploads/research_papers/webpage-2105472 Process Dynamics and Control Course Syllabus-oct18.docx', upload_date: '2023-10-21' },
+  { filename: 'webpage-2102435 Industrial Automation Course Syllabus-oct18.docx', filepath: '/uploads/research_papers/webpage-2102435 Industrial Automation Course Syllabus-oct18.docx', upload_date: '2023-10-21' },
   { filename: 'webpage-2102435 Industrial Automation Course Syllabus.docx', filepath: '/uploads/research_papers/webpage-2102435 Industrial Automation Course Syllabus.docx', upload_date: '2023-10-15' },
   { filename: 'webpage-2105472 Process Dynamics and Control Course Syllabus.docx', filepath: '/uploads/research_papers/webpage-2105472 Process Dynamics and Control Course Syllabus.docx', upload_date: '2023-10-10' },
   { filename: 'webpage-2105676 Instrumentation in Chemical Process Course Syllabus.docx', filepath: '/uploads/research_papers/webpage-2105676 Instrumentation in Chemical Process Course Syllabus.docx', upload_date: '2023-10-05' },
@@ -61,7 +65,7 @@ const allItems = ref([
   { filename: 'webpage-Teaching Done by EU (Seminar 1) on April 8,22,2021.docx', filepath: '/uploads/research_papers/webpage-Teaching Done by EU (Seminar 1) on April 8,22,2021.docx', upload_date: '2023-08-05' },
   { filename: 'webpage-Training in EU at the University (PPP-Train1) on March 5-April 22022.docx', filepath: '/uploads/research_papers/webpage-Training in EU at the University (PPP-Train1) on March 5-April 22022.docx', upload_date: '2023-08-01' },
   { filename: 'webpage-Vocational (VPP-Training).docx', filepath: '/uploads/research_papers/webpage-Vocational (VPP-Training).docx', upload_date: '2023-07-28' },
-  { filename: 'webpage-aug22.pptx', filepath: '/uploads/research_papers/webpage-aug22.pptx', upload_date: '2023-07-25' }
+  { filename: 'webpage-aug22.pptx', filepath: '/uploads/research_papers/webpage-aug22.pptx', upload_date: '2023-07-25' },
 ]);
 const search = ref('');
 const totalItems = computed(() => allItems.value?.length || 0);
